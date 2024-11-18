@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Ambiente/Canos.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Ambiente/Obstaculos.gd" type="Script" id=2]
+[ext_resource path="res://assets/audio/ponto.wav" type="AudioStream" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 22, 548.5 )
+
+[node name="Obstaculos" type="Node2D" groups=["obstaculos"]]
+position = Vector2( 0, 427 )
+script = ExtResource( 2 )
+
+[node name="Canos" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 75 )
+
+[node name="Canos2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -75 )
+rotation = 3.14159
+
+[node name="Passagem" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Passagem"]
+position = Vector2( 3, 1.5 )
+shape = SubResource( 1 )
+
+[node name="ponto" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[connection signal="body_entered" from="Canos" to="." method="_on_Canos_body_entered"]
+[connection signal="body_entered" from="Canos2" to="." method="_on_Canos_body_entered"]
+[connection signal="body_exited" from="Passagem" to="." method="_on_Passagem_body_exited"]
