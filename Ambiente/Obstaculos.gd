@@ -19,7 +19,7 @@ var VELOCIDADE = 0
 func _physics_process(delta):
 	carregar_dado()
 	VELOCIDADE = 200 + pontos * 10
-	position.x += -VELOCIDADE * delta
+	position.x += -(VELOCIDADE) * delta
 	if global_position.x <= -200:
 		queue_free()
 		

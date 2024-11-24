@@ -8,9 +8,8 @@ onready var pontos_label = $GameOver/VBoxContainer/Pontos
 onready var recorde_label = $GameOver/VBoxContainer/Recorde
 onready var game_over = $GameOver
 
-
 var jogo_iniciado = false
-
+		
 func _input(event):
 	if event.is_action_pressed("clique") && !jogo_iniciado:
 		emit_signal("novo_jogo")

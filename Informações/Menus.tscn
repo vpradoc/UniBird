@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/texturas/message.png" type="Texture" id=1]
 [ext_resource path="res://Informações/Menus.gd" type="Script" id=2]
@@ -7,6 +7,11 @@
 [sub_resource type="DynamicFont" id=1]
 size = 48
 font_data = ExtResource( 3 )
+
+[sub_resource type="Theme" id=3]
+Button/colors/font_color_focus = Color( 0.992157, 1, 0, 1 )
+Button/colors/font_color_hover = Color( 0.992157, 1, 0, 1 )
+Button/colors/font_color_pressed = Color( 1, 0.560784, 0, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -88,11 +93,7 @@ margin_top = 252.0
 margin_right = 371.0
 margin_bottom = 327.0
 rect_min_size = Vector2( 0, 75 )
-custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
-custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 0.00784314, 1, 0, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+theme = SubResource( 3 )
 custom_fonts/font = SubResource( 1 )
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 2 )
