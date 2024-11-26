@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/fontes/flappyfont.TTF" type="DynamicFontData" id=1]
 [ext_resource path="res://Informações/pause.gd" type="Script" id=2]
@@ -45,16 +45,6 @@ action = "ui_cancel"
 
 [sub_resource type="ShortCut" id=7]
 shortcut = SubResource( 6 )
-
-[sub_resource type="DynamicFont" id=15]
-size = 35
-outline_size = 3
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 1 )
-
-[sub_resource type="Theme" id=16]
-default_font = SubResource( 15 )
-CheckButton/fonts/font = SubResource( 15 )
 
 [node name="Pausado" type="CanvasLayer"]
 pause_mode = 2
@@ -109,20 +99,6 @@ custom_styles/focus = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Fechar o Jogo"
 
-[node name="BMusica" type="CheckButton" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -212.0
-margin_top = -47.0
-theme = SubResource( 16 )
-pressed = true
-action_mode = 0
-text = "Musica"
-align = 2
-
 [connection signal="pressed" from="VBoxContainer/Voltar" to="." method="_on_Voltar_pressed"]
 [connection signal="pressed" from="VBoxContainer/Resetar" to="." method="_on_Resetar_pressed"]
 [connection signal="pressed" from="VBoxContainer/Fechar" to="." method="_on_Fechar_pressed"]
-[connection signal="toggled" from="BMusica" to="." method="_on_BMusica_toggled"]

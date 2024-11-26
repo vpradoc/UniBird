@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/texturas/background.png" type="Texture" id=1]
 [ext_resource path="res://Passaro/Jogador/Jogador.tscn" type="PackedScene" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://assets/audio/fundo.wav" type="AudioStream" id=8]
 [ext_resource path="res://Informações/pause.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Informações/Musica.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/texturas/background1.webp" type="Texture" id=11]
+[ext_resource path="res://assets/texturas/background2.webp" type="Texture" id=12]
+[ext_resource path="res://assets/texturas/background3.webp" type="Texture" id=13]
 
 [node name="Background" type="Node2D"]
 script = ExtResource( 6 )
@@ -20,10 +23,28 @@ script = ExtResource( 6 )
 
 [node name="MenuIniciar" parent="." instance=ExtResource( 7 )]
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="bg0" type="Sprite" parent="."]
 scale = Vector2( 0.9375, 1.3418 )
 texture = ExtResource( 1 )
 centered = false
+
+[node name="bg1" type="Sprite" parent="."]
+visible = false
+position = Vector2( 239.5, 426.5 )
+scale = Vector2( 0.469727, 0.833008 )
+texture = ExtResource( 11 )
+
+[node name="bg2" type="Sprite" parent="."]
+visible = false
+position = Vector2( 240, 427 )
+scale = Vector2( 0.46875, 0.833984 )
+texture = ExtResource( 12 )
+
+[node name="bg3" type="Sprite" parent="."]
+visible = false
+position = Vector2( 240.5, 427.5 )
+scale = Vector2( 0.469727, 0.834961 )
+texture = ExtResource( 13 )
 
 [node name="SpawnCanos" parent="." instance=ExtResource( 4 )]
 position = Vector2( 650, 0 )

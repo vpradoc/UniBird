@@ -6,15 +6,54 @@ onready var chao = $Chao
 onready var menu = $MenuIniciar
 onready var musica = $MusicaFundo
 
-const LOG_RECORD = "user://salvarrecord.save"
-const LOG_PONTOS = "user://salvarpontos.save"
+onready var bg0 = $bg0
+onready var bg1 = $bg1
+onready var bg2 = $bg2
+onready var bg3 = $bg3
+
+var moedas = 0
+var pontos = 0
+var recorde = 0
+var background = 0 
 
 var pontuar = 0 setget set_pontos
-var recorde = 0
 
 func _ready():
 	spawn.connect("criar_obstaculo", self, "_obstaculo_criado")
-	carregar_recorde()
+	var sdados = ScriptDados.carregar_dados()
+	puxar_dados(sdados)
+	ScriptDados.salvar_tudo(sdados)
+	mudar_background()
+
+
+func mudar_background():
+	var bg = ScriptDados.estrutura.background
+	if bg == 0:
+		bg0.visible = true
+		bg1.visible = false
+		bg2.visible = false
+		bg3.visible = false
+		
+	else: if bg == 1:
+		
+		bg0.visible = false
+		bg1.visible = false
+		bg2.visible = true
+		bg3.visible = false
+		
+	else: if bg == 2: 
+		
+		bg0.visible = false
+		bg1.visible = false
+		bg2.visible = false
+		bg3.visible = true
+		
+	else: if bg == 3:
+		
+		bg0.visible = false
+		bg1.visible = true
+		bg2.visible = false
+		bg3.visible = false
 	
 func novo_jogo():
 	self.pontuar = 0
@@ -26,7 +65,7 @@ func pontos_player():
 func set_pontos(x):
 	pontuar = x
 	hud.att_pontos(pontuar)
-	salvar_pontos()
+	ScriptDados.salvar_pontos(pontuar)
 
 func _obstaculo_criado(obs):
 	obs.connect("pontuar", self, "pontos_player")
@@ -46,33 +85,25 @@ func game_over():
 	musica.stop()
 	chao.get_node("AnimationPlayer").stop()
 	get_tree().call_group("obstaculos", "set_physics_process", false)
+	ScriptDados.salvar_moedas(moedas + pontuar)
 	
-	if pontuar > recorde:
-		recorde = pontuar
-		salvar_recorde()
-	
-	menu.novo_game_over(pontuar, recorde)
+	if pontuar > ScriptDados.estrutura.recorde:
+		ScriptDados.salvar_recorde(pontuar)
+		
+	menu.novo_game_over(pontuar, ScriptDados.estrutura.recorde)
 
+
+func _unhandled_input(event):
+	if event.is_action_pressed("loja_open"):
+# warning-ignore:return_value_discarded
+		get_tree().change_scene("res://Ambiente/Loja.tscn")
 
 func _on_MenuIniciar_novo_jogo():
+	ScriptDados.carregar_dados()
 	novo_jogo()
 
-func salvar_recorde():
-	var salvar = File.new()
-	salvar.open(LOG_RECORD, File.WRITE)
-	salvar.store_var(recorde)
-	salvar.close()
-	
-	
-func carregar_recorde():
-	var dados = File.new()
-	if dados.file_exists(LOG_RECORD):
-		dados.open(LOG_RECORD, File.READ)
-		recorde = dados.get_var()
-		dados.close()
-
-func salvar_pontos():
-	var salvar = File.new()
-	salvar.open(LOG_PONTOS, File.WRITE)
-	salvar.store_var(pontuar)
-	salvar.close()
+func puxar_dados(dados):
+	moedas = dados.moedas
+	pontos = dados.pontos
+	recorde = dados.recorde
+	background = dados.background

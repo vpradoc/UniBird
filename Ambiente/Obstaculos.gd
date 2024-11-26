@@ -4,20 +4,10 @@ signal pontuar
 
 onready var ponto_som = $ponto
 
-const LOG = "user://salvarpontos.save"
-var pontos = 0
-
-func carregar_dado():
-	var dados = File.new()
-	if dados.file_exists(LOG):
-		dados.open(LOG, File.READ)
-		pontos = dados.get_var()
-		dados.close()
-
+var pontos = ScriptDados.estrutura.pontos
 var VELOCIDADE = 0
 
 func _physics_process(delta):
-	carregar_dado()
 	VELOCIDADE = 200 + pontos * 10
 	position.x += -(VELOCIDADE) * delta
 	if global_position.x <= -200:

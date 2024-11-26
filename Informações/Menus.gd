@@ -12,6 +12,7 @@ var jogo_iniciado = false
 		
 func _input(event):
 	if event.is_action_pressed("clique") && !jogo_iniciado:
+		ScriptDados.carregar_dados()
 		emit_signal("novo_jogo")
 		tween.interpolate_property(mensagem, "modulate:a", 1, 0, 0.5)
 		tween.start()
